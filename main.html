@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, orientation=landscape" />
+<title>Ich liebe dich</title>
+<style>
+  :root {
+    --heart-size: 20vmin;
+    --heart-red: #ff0033;
+    --red-glow-strong: rgba(255,0,51,0.9);
+    --white-glow: rgba(255,255,255,1);
+    --heartbeat-duration: 1.5s;
+    --letter-width: min(1000px, 90vw);
+    --letter-height: min(70vh, 600px);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    overflow: hidden;
+    font-family: system-ui, sans-serif;
+    color: white;
+    transition: background 3s ease-in-out;
+  }
+
+  #container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3vmin;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    user-select: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  #left-text, #right-text {
+    font-weight: 900;
+    font-size: clamp(3rem, 8vw, 8rem);
+    color: white;
+    text-shadow: 0 0 20px rgba(255,255,255,0.7), 0 0 40px rgba(255,255,255,0.9);
+  }
+
+  #heart {
+    width: var(--heart-size);
+    height: var(--heart-size);
+    background: url('heart.png') center/contain no-repeat;
+    filter: drop-shadow(0 0 120px var(--red-glow-strong)) drop-shadow(0 0 70px var(--heart-red));
+    transform-origin: center;
+    animation: heartbeat var(--heartbeat-duration) infinite ease-in-out;
+    cursor: pointer;
+    transition: transform 0.35s ease, filter 0.35s ease;
+  }
+
+  #heart:hover {
+    animation: heartbeat-hover 1s infinite ease-in-out;
+    filter: drop-shadow(0 0 100px var(--red-glow-strong)) drop-shadow(0 0 50px var(--heart-red));
+    transform: scale(1.1);
+  }
+
+  #heart.big-glow {
+    animation: big-heart 0.8s forwards;
+    filter: drop-shadow(0 0 250px var(--white-glow)) drop-shadow(0 0 180px white);
+  }
+
+  #trigger-btn {
+    position: absolute;
+    width: 14vmin;
+    height: 14vmin;
+    border-radius: 50%;
+    border: 3px solid var(--heart-red);
+    background: rgba(255,0,51,0.1);
+    color: var(--heart-red);
+    font-size: 1.6rem;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: background 0.3s ease, transform 0.3s ease, opacity 0.6s ease;
+  }
+
+  #trigger-btn:hover {
+    background: rgba(255, 0, 51, 0.3);
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .btn-hide {
+    opacity: 0 !important;
+    transform: translate(-50%, -50%) scale(0.3) !important;
+    pointer-events: none;
+  }
+
+  #love-letter {
+    position: fixed;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%) scale(.95);
+    width: var(--letter-width);
+    height: var(--letter-height);
+    background: rgba(77, 0, 0, 0.616);
+    border: 3px solid var(--heart-red);
+    box-shadow: 0 0 25px var(--heart-red), 0 0 70px rgba(61, 0, 12, 0.966);
+    border-radius: 28px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    overflow-y: auto;
+    padding: clamp(1rem, 2.5vmin, 2.5rem);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .9s ease, transform .9s ease;
+    z-index: 5;
+  }
+  #love-letter.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  #love-letter h1 {
+    font-size: clamp(2rem, 4vw, 4rem);
+    margin-bottom: 1rem;
+    text-align: center;
+    text-shadow: 0 0 10px #fff, 0 0 25px rgba(255,255,255,1);
+  }
+  #love-letter p {
+    font-size: clamp(1.1rem, 1.6vw, 1.6rem);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 6px rgba(0,0,0,0.3);
+  }
+
+
+  #love-letter::-webkit-scrollbar { width: 10px; }
+  #love-letter::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 999px;
+  }
+  #love-letter::-webkit-scrollbar-track { background: rgba(255,255,255,0.08); }
+
+  @keyframes heartbeat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.08);} }
+  @keyframes heartbeat-hover { 0%,100%{transform:scale(1.1);} 50%{transform:scale(1.15);} }
+  @keyframes big-heart { 0%{transform:scale(1.1);} 100%{transform:scale(20);} }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <div id="left-text">ICH</div>
+  <div id="heart"></div>
+  <div id="right-text">DICH</div>
+</div>
+
+<button id="trigger-btn">Klick mich!</button>
+<div id="love-letter"></div>
+
+<script>
+  const container = document.getElementById('container');
+  const heart = document.getElementById('heart');
+  const btn = document.getElementById('trigger-btn');
+  const body = document.body;
+  const loveLetterEl = document.getElementById('love-letter');
+
+  let clickCount = 0;
+
+  const loveLetterHTML = `
+    <h1>MEIN LOVI</h1>
+    <p>Love, seit dem Moment, in dem ich dich kennengelernt habe, ist alles anders. Du bist wie ein Sonnenaufgang nach einer langen Nacht angenehm war, hell und voller Hoffnung.</p>
+    <p>Mit dir fühlt sich selbst das Einfachste bedeutungsvoll an. Ein Blick, ein Lachen, ein Wort von dir und ich habe denn besten tag meines lebens. Du bist mein Zuhause, mein sicherer Ort, mein größtes Abenteuer.</p>
+    <p>Ich möchte dich lieben, wenn die Welt laut ist, wenn sie still ist, wenn wir lachen, wenn wir weinen. Ich möchte dich lieben, in jeder Stunde, an jedem Tag, in jedem Jahr, das kommt.</p>
+    <p>Danke, dass du da bist. Danke, dass du mich so liebst, wie ich bin. Danke, dass ich bei dir ich selbst sein kann.</p>
+    <p><strong>Ich liebe dich! Heute, morgen und für immer.</strong></p>
+  `;
+
+  btn.addEventListener('click', () => {
+    btn.classList.add('btn-hide');
+    body.style.background = '#000';
+    setTimeout(() => { container.style.opacity = '1'; }, 1000);
+  });
+
+  heart.addEventListener('click', () => {
+    clickCount++;
+    heart.classList.add('big-glow');
+    body.style.background = '#fff';
+
+    if (clickCount === 2) {
+      loveLetterEl.innerHTML = loveLetterHTML;
+      loveLetterEl.classList.add('show');
+    }
+  });
+</script>
+
+</body>
+</html>
