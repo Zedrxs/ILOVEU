@@ -1,10 +1,17 @@
+/* Base Reset */
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: black;
   font-family: Arial, sans-serif;
+  background-color: white;
+  animation: bgFadeToBlack 3s ease forwards 2s;
 }
+
+@keyframes bgFadeToBlack {
+  to { background-color: black; }
+}
+
 .background {
   position: relative;
   height: 100%;
@@ -12,68 +19,101 @@ body, html {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  opacity: 0;
+  animation: fadeInElements 2s ease forwards 4s;
 }
+
+@keyframes fadeInElements {
+  to { opacity: 1; }
+}
+
 .heart {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   width: 100vw; max-width: 1000px;
-  opacity: 0.15;
-  animation: pulse-heart 3s ease-in-out infinite;
+  opacity: 1;
+  filter: drop-shadow(0 0 2000px #ffffff);
+  animation: pulse-heart 4s ease-in-out infinite;
   z-index: 0;
 }
+
 @keyframes pulse-heart {
-  0%,100% { opacity: 0.15; filter: drop-shadow(0 0 10px #8b0000); }
-  50%    { opacity: 0.25; filter: drop-shadow(0 0 25px #8b0000); }
+  0%,100% { opacity: 1; filter: drop-shadow(0 0 40px #4e0000); }
+  50%    { opacity: 1; filter: drop-shadow(0 0 20px #4e0000); }
 }
+
 .button-container {
   display: grid;
-  grid-template-columns: repeat(2,3fr);
-  gap:20px;
-  z-index:1;
-  padding:20px;
+  grid-template-columns: repeat(2, 3fr);
+  gap: 20px;
+  z-index: 1;
+  padding: 20px;
+  opacity: 0;
+  animation: fadeInElements 2s ease forwards 4.5s;
 }
+
 .glow-button {
   position: relative;
   background-color: white;
   border: 2px solid white;
-  width: 90px; height: 90px;
+  width: 90px;
+  height: 90px;
   border-radius: 10px;
   cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.3s ease;
   box-shadow: 0 0 10px white;
 }
+
 .glow-button:hover {
   transform: scale(1.1);
   box-shadow: 0 0 25px white;
 }
+
 .btn-label {
-  position: absolute; top:50%; left:50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 1.5rem; font-weight: bold; color: black;
-  pointer-events: none; z-index: 2;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: black;
+  pointer-events: none;
+  z-index: 2;
 }
+
 .glow-button img {
-  width: 60%; height: 60%; object-fit: contain;
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
   filter: drop-shadow(0 0 5px white);
   transition: transform 0.3s ease, filter 0.3s ease;
 }
+
 .glow-button:hover img {
   filter: drop-shadow(0 0 15px white);
   transform: scale(1.1);
 }
+
 .fade-out {
   animation: fadeOut 1s forwards;
 }
+
 @keyframes fadeOut {
   to { opacity: 0; transform: scale(0.9); }
 }
+
 .textbox {
   position: fixed;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%) scale(0.8);
-  width: 80%; max-width: 600px; height: 60%;
+  width: 80%;
+  max-width: 600px;
+  height: 60%;
   background-color: rgba(10,0,0,0.95);
   border: 2px solid #5c0000;
   border-radius: 10px;
@@ -85,29 +125,45 @@ body, html {
   opacity: 0;
   animation: openTextbox 0.5s forwards;
 }
+
 @keyframes openTextbox {
   to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
+
 @keyframes closeTextbox {
   0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
   100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
 }
+
 .textbox.hidden {
   display: none;
 }
+
 .textbox-close {
-  position: absolute; top:10px; right:15px;
-  background: transparent; border: none;
-  color: #ff4b4b; font-size: 1.5rem;
-  cursor: pointer; text-shadow: 0 0 8px #8b0000;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: #ff4b4b;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-shadow: 0 0 8px #8b0000;
   z-index: 2;
 }
-.textbox-close:hover { color: #ffffff; }
+
+.textbox-close:hover {
+  color: #ffffff;
+}
+
 .textbox-header {
-  margin: 10px; font-size: 1.5rem;
-  text-align: center; color: #ff4b4b;
+  margin: 10px;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #ff4b4b;
   text-shadow: 0 0 5px #8b0000;
 }
+
 .textbox-content {
   padding: 15px;
   overflow-y: auto;
@@ -115,11 +171,26 @@ body, html {
   color: #f0f0f0;
   line-height: 1.6;
 }
+
 /* Scrollbar */
-.textbox-content::-webkit-scrollbar { width:10px; }
-.textbox-content::-webkit-scrollbar-track { background: rgba(50,0,0,0.4); border-radius:10px; }
-.textbox-content::-webkit-scrollbar-thumb { background:#8b0000; border-radius:10px; box-shadow:0 0 10px #8b0000; }
-.textbox-content::-webkit-scrollbar-thumb:hover { background:#b30000; }
+.textbox-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.textbox-content::-webkit-scrollbar-track {
+  background: rgba(50,0,0,0.4);
+  border-radius: 10px;
+}
+
+.textbox-content::-webkit-scrollbar-thumb {
+  background: #8b0000;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #8b0000;
+}
+
+.textbox-content::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
 
 .Uberschrift {
   position: absolute;
@@ -130,6 +201,8 @@ body, html {
   font-size: 3rem;
   text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
   z-index: 2;
+  opacity: 0;
+  animation: fadeInElements 2s ease forwards 5s;
 }
 
 .Uberschrift2 {
@@ -141,4 +214,6 @@ body, html {
   font-size: 2rem;
   text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
   z-index: 2;
+  opacity: 0;
+  animation: fadeInElements 2s ease forwards 5.2s;
 }
