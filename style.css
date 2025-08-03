@@ -1,14 +1,15 @@
-body, html {
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
   font-family: Arial, sans-serif;
   background-color: white;
+  overflow: hidden;
+  touch-action: none;
+  position: fixed;
+  overscroll-behavior: none;
   animation: bgFadeToBlack 3s ease forwards 2s;
-}
-
-@keyframes bgFadeToBlack {
-  to { background-color: black; }
 }
 
 .background {
@@ -22,10 +23,6 @@ body, html {
   animation: fadeInElements 2s ease forwards 4s;
 }
 
-@keyframes fadeInElements {
-  to { opacity: 1; }
-}
-
 .heading-container {
   display: flex;
   flex-direction: column;
@@ -35,8 +32,84 @@ body, html {
   width: 100%;
   padding: 1rem;
 }
+.hide-sub {
+  animation: fadeOutSub 0.6s ease forwards;
+}
 
-.Uberschrift {
+@keyframes fadeOutSub {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Ich liebe dich in Mitte bewegen */
+.move-main-down {
+  animation: moveToCenter 1s ease forwards;
+  z-index: 1;
+}
+
+@keyframes moveToCenter {
+  from {
+    transform: translateX(-50%) translateY(0);
+    top: 30px;
+    font-size: 3rem;
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-50%) translateY(-50%);
+    top: 50%;
+    font-size: 2.5rem;
+    opacity: 0.15;
+  }
+}
+
+/* Sub-Headline einblenden (Kalender) */
+.show-sub {
+  animation: fadeInSub 0.6s ease forwards;
+}
+@keyframes fadeInSub {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hauptüberschrift zurück nach oben */
+.move-main-up {
+  animation: moveToTop 1s ease forwards;
+}
+@keyframes moveToTop {
+  from {
+    transform: translateX(-50%) translateY(-50%);
+    top: 50%;
+    font-size: 2.5rem;
+    opacity: 0.15;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    top: 30px;
+    font-size: 3rem;
+    opacity: 1;
+  }
+}
+
+/* Fade-In für container, headings und heart */
+.fade-in {
+  animation: fadeInElements 1s ease forwards;
+}
+@keyframes fadeInElements {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Fade-Out bleibt wie gehabt */
+.fade-out {
+  animation: fadeOutElements 1s ease forwards;
+}
+@keyframes fadeOutElements {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.9); }
+}
+
+
+.header-main {
   font-size: 8vw;
   color: white;
   text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
@@ -44,9 +117,10 @@ body, html {
   opacity: 0;
   animation: fadeInElements 2s ease forwards 5s;
   margin: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
-.Uberschrift-sub {
+.header-sub {
   font-size: 6vw;
   color: white;
   text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
@@ -54,25 +128,22 @@ body, html {
   opacity: 0;
   animation: fadeInElements 3s ease forwards 5.2s;
   margin: 0;
+  transition: opacity 0.5s ease;
 }
 
 .heart {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 35%;
+  left: 15%;
   transform: translate(-50%, -50%);
   width: 300vw;
-  max-width: 1000px;
+  max-width: 700px;
   opacity: 1;
   filter: drop-shadow(0 0 2000px #ffffff);
   animation: pulse-heart 4s ease-in-out infinite;
   z-index: 0;
 }
 
-@keyframes pulse-heart {
-  0%,100% { opacity: 1; filter: drop-shadow(0 0 60px #4e0000); }
-  50%    { opacity: 1; filter: drop-shadow(0 0 20px #4e0000); }
-}
 
 .button-container {
   display: grid;
@@ -135,9 +206,6 @@ body, html {
   animation: fadeOut 1s forwards;
 }
 
-@keyframes fadeOut {
-  to { opacity: 0; transform: scale(0.9); }
-}
 
 .textbox {
   position: fixed;
@@ -157,15 +225,6 @@ body, html {
   overflow: hidden;
   opacity: 0;
   animation: openTextbox 0.5s forwards;
-}
-
-@keyframes openTextbox {
-  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-}
-
-@keyframes closeTextbox {
-  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
 }
 
 .textbox.hidden {
@@ -205,7 +264,6 @@ body, html {
   line-height: 1.6;
 }
 
-/* Scrollbar */
 .textbox-content::-webkit-scrollbar {
   width: 10px;
 }
@@ -223,4 +281,111 @@ body, html {
 
 .textbox-content::-webkit-scrollbar-thumb:hover {
   background: #b30000;
+}
+
+.fade-in {
+  animation: fadeInElements 2s ease forwards;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: scale(0.9); }
+}
+
+@keyframes bgFadeToBlack {
+  to { background-color: black; }
+}
+
+@keyframes pulse-heart {
+  0%,100% { opacity: 1; filter: drop-shadow(0 0 60px #4e0000); }
+  50%    { opacity: 1; filter: drop-shadow(0 0 20px #4e0000); }
+}
+
+@keyframes fadeInElements {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes openTextbox {
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+
+}
+
+@keyframes closeTextbox {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+
+}
+
+/* Herz pulsiert (rot leuchtend) */
+.heart-pulse {
+  animation: heartbeat 1.5s infinite ease-in-out;
+  filter: drop-shadow(0 0 15px red);
+}
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px red); }
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 25px red); }
+}
+
+/* Ich liebe dich: erscheint */
+.header-main {
+  transition: all 1s ease;
+}
+.move-main-down {
+  animation: moveToCenter 1s ease forwards;
+}
+@keyframes moveToCenter {
+  from {
+    top: 30px;
+    transform: translateX(-50%) translateY(0);
+    font-size: 3rem;
+    opacity: 1;
+  }
+  to {
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 2.5rem;
+    opacity: 0.15;
+  }
+}
+
+/* Ich liebe dich: zurück nach oben */
+.move-main-up {
+  animation: moveToTop 1s ease forwards;
+}
+@keyframes moveToTop {
+  from {
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 2.5rem;
+    opacity: 0.15;
+  }
+  to {
+    top: 30px;
+    transform: translateX(-50%) translateY(0);
+    font-size: 3rem;
+    opacity: 1;
+  }
+}
+
+/* Kalender-Sub verschwindet / erscheint */
+.hide-sub {
+  animation: fadeOutSub 0.6s ease forwards;
+}
+@keyframes fadeOutSub {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-20px); }
+}
+
+.show-sub {
+  animation: fadeInSub 0.6s ease forwards;
+}
+@keyframes fadeInSub {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
