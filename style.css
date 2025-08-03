@@ -127,7 +127,7 @@ body, html {
   left: 40%;
   transform: translateX(-50%);
   color: white;
-  font-size: 4rem;
+  font-size: 3rem;
   text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
   z-index: 2;
 }
