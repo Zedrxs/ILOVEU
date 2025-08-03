@@ -1,0 +1,111 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: black;
+  font-family: Arial, sans-serif;
+}
+
+.background {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+  max-width: 500px;
+  opacity: 0.15;
+  z-index: 0;
+  animation: pulse-heart 3s ease-in-out infinite;
+}
+
+@keyframes pulse-heart {
+  0%, 100% {
+    opacity: 0.15;
+    filter: drop-shadow(0 0 10px #8b0000);
+  }
+  50% {
+    opacity: 0.25;
+    filter: drop-shadow(0 0 25px #8b0000);
+  }
+}
+
+.button-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  z-index: 1;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .button-container {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+  }
+}
+
+.glow-button {
+  position: relative;
+  background-color: white;
+  border: 2px solid white;
+  width: 90px;
+  height: 90px;
+  padding: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px white;
+}
+
+.glow-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px white;
+}
+
+.btn-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: black;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.glow-button img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 5px white);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.glow-button:hover img {
+  filter: drop-shadow(0 0 15px white);
+  transform: scale(1.1);
+}
+
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
