@@ -5,6 +5,7 @@
   const container = document.getElementById('buttonContainer');
   const infoBox = document.getElementById('infoBox');
   const textboxContent = document.getElementById('textboxContent');
+  const closeBtn = document.getElementById('closeTextbox');
 
   document.querySelectorAll('.glow-button').forEach(button => {
     const btnDate = button.dataset.date;
@@ -16,6 +17,8 @@
         heart.style.transition = 'opacity 1s ease-out';
         heart.style.opacity = '0';
         infoBox.classList.remove('hidden');
+        infoBox.style.display = 'flex';
+        infoBox.style.animation = 'openTextbox 0.5s forwards';
         textboxContent.innerText = btnText;
       });
     } else {
@@ -23,21 +26,15 @@
       button.style.cursor = 'not-allowed';
     }
   });
+
+  closeBtn.addEventListener('click', () => {
+    infoBox.style.animation = 'closeTextbox 0.4s forwards';
+    setTimeout(() => {
+      infoBox.style.display = 'none';
+      infoBox.classList.add('hidden');
+      bg.style.backgroundColor = 'black';
+      heart.style.opacity = '0.15';
+      container.classList.remove('fade-out');
+    }, 400);
+  });
 })();
-
-
-button.addEventListener('click', () => {
-  const bg = document.getElementById('background');
-  const heart = document.getElementById('heart');
-  const container = document.getElementById('buttonContainer');
-
-  // Background rot
-  bg.style.backgroundColor = 'darkred';
-
-  // Buttons verschwinden
-  container.classList.add('fade-out');
-
-  // Herz transparent ausblenden
-  heart.style.transition = 'opacity 1s ease-out';
-  heart.style.opacity = '0';
-});
