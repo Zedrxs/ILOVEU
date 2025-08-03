@@ -3,6 +3,13 @@
   window.addEventListener("scroll", () => window.scrollTo(0, 0));
   document.body.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
 
+  window.addEventListener("orientationchange", () => {
+    setTimeout(() => {
+      // Seite neu laden, um CSS richtig anzuwenden
+      location.reload();
+    }, 500);
+  });
+
   const todayISO = new Date().toISOString().split("T")[0];
 
   const buttons = document.querySelectorAll(".glow-button");
@@ -31,10 +38,10 @@
 
         // Textanimation beim Klick
         headerMain?.classList.add("move-main-down");
-        headerMain?.classList.remove("move-main-up");
+        headerMain?.classList.remove("move-main-up", "heading-shift-right");
 
         headerSub?.classList.add("hide-sub");
-        headerSub?.classList.remove("show-sub");
+        headerSub?.classList.remove("show-sub", "heading-shift-right");
 
         buttonContainer.classList.add("fade-out");
         buttonContainer.classList.remove("fade-in");
@@ -75,10 +82,10 @@
       headings && (headings.style.display = "flex");
 
       headerMain?.classList.remove("move-main-down");
-      headerMain?.classList.add("move-main-up");
+      headerMain?.classList.add("move-main-up", "heading-shift-right");
 
       headerSub?.classList.remove("hide-sub");
-      headerSub?.classList.add("show-sub");
+      headerSub?.classList.add("show-sub", "heading-shift-right", "calendar-large");
 
       buttonContainer.classList.remove("fade-out");
       buttonContainer.classList.add("fade-in");
@@ -96,10 +103,34 @@
 
   window.addEventListener("load", () => {
     const screen = document.getElementById("whiteScreen");
-    screen.classList.add("fade-out-white");
+    screen?.classList.add("fade-out-white");
+
+    // Direkt beim Laden Intro-Animationen ausführen (wie beim Close)
+    headerMain?.classList.add("move-main-up", "heading-shift-right");
+    headerSub?.classList.add("show-sub", "heading-shift-right", "calendar-large");
+
     setTimeout(() => {
-      screen.remove();
+      screen?.remove();
       background.classList.remove("hidden");
     }, 1500);
   });
+
+  const rotateOverlay = document.getElementById("rotateOverlay");
+
+  // Funktion, um Overlay je nach Orientierung zu zeigen/verstecken
+  function checkOrientation() {
+    if (window.matchMedia("(max-width: 768px) and (orientation: portrait)").matches) {
+      rotateOverlay.classList.remove("hidden");
+    } else {
+      rotateOverlay.classList.add("hidden");
+    }
+  }
+
+  // Initial prüfen
+  checkOrientation();
+
+  // Auf Änderungen der Ausrichtung reagieren
+  window.addEventListener("resize", checkOrientation);
+  window.addEventListener("orientationchange", checkOrientation);
+
 })();
