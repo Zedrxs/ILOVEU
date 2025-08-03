@@ -138,11 +138,12 @@ html, body {
   opacity: 1;
   animation: fadeInElements 2s ease forwards 4.5s;
   width: 100%;
-  max-width: 280px;
+  max-width: 250px;
 }
 
 .glow-button {
   position: relative;
+  bottom: 50%;
   background-color: white;
   border: 2px solid white;
   width: 100%;

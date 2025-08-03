@@ -1,9 +1,20 @@
 (() => {
-  window.scrollTo(0, 0);
-  window.addEventListener("scroll", () => window.scrollTo(0, 0));
-  document.body.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
+  //window.scrollTo(0, 0);
+  //window.addEventListener("scroll", () => window.scrollTo(0, 0));
+  //document.body.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
 
   // Overlay für Landscape-Hinweis
+
+    window.addEventListener('scroll', () => {
+    if (window.scrollY < lastScrollY) {
+      window.scrollTo(0, lastScrollY);
+    } else {
+      lastScrollY = window.scrollY;
+    }
+  });
+
+  let lastScrollY = 0;
+
   const rotateOverlay = document.getElementById("rotateOverlay");
   function checkOrientation() {
     if (window.matchMedia("(max-width: 768px) and (orientation: landscape)").matches) {
