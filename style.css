@@ -17,7 +17,7 @@ body, html {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 70vw; max-width: 500px;
+  width: 100vw; max-width: 1000px;
   opacity: 0.15;
   animation: pulse-heart 3s ease-in-out infinite;
   z-index: 0;
@@ -28,7 +28,7 @@ body, html {
 }
 .button-container {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(2,3fr);
   gap:20px;
   z-index:1;
   padding:20px;
@@ -115,7 +115,7 @@ body, html {
   color: #f0f0f0;
   line-height: 1.6;
 }
-
+/* Scrollbar */
 .textbox-content::-webkit-scrollbar { width:10px; }
 .textbox-content::-webkit-scrollbar-track { background: rgba(50,0,0,0.4); border-radius:10px; }
 .textbox-content::-webkit-scrollbar-thumb { background:#8b0000; border-radius:10px; box-shadow:0 0 10px #8b0000; }
@@ -123,8 +123,8 @@ body, html {
 
 .Uberschrift {
   position: absolute;
-  top: 10px;
-  left: 40%;
+  top: 30px;
+  left: 50%;
   transform: translateX(-50%);
   color: white;
   font-size: 3rem;
@@ -134,8 +134,8 @@ body, html {
 
 .Uberschrift2 {
   position: absolute;
-  top: 100px;
-  left: 60%;
+  top: 90px;
+  left: 50%;
   transform: translateX(-50%);
   color: white;
   font-size: 2rem;
