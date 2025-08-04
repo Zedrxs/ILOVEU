@@ -88,13 +88,13 @@ html, body {
 
 .header-main {
   position:fixed;
-  top: 15%;            /* oben etwas Abstand */
+  top: 12%;            /* oben etwas Abstand */
   left: 50px;           /* links etwas Abstand */
   font-size: 8vw;       /* etwas kleiner als header-sub */
   color: white;
   text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
   z-index: 10;
-  opacity: 1;           /* immer sichtbar */
+  opacity: 1;
   transition: transform 0.5s ease, opacity 0.5s ease;
   animation: none !important; /* Animationen unterbinden, da immer sichtbar */
   user-select: none;
@@ -102,7 +102,7 @@ html, body {
 }
 
 .header-sub {
-  position: relative;
+  position:relative;
   top: 20%;
   left: 8%;
   transform: translate(-50%, -50%);
