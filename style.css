@@ -88,7 +88,7 @@ html, body {
 
 .header-main {
   position:fixed;
-  top: 12%;            /* oben etwas Abstand */
+  top: 10px;            /* oben etwas Abstand */
   left: 50px;           /* links etwas Abstand */
   font-size: 8vw;       /* etwas kleiner als header-sub */
   color: white;
