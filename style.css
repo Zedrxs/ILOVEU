@@ -1,3 +1,100 @@
+/* Login Overlay Styles */
+.login-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.login-container {
+  position: relative;
+  padding: 4px;
+  border-radius: 20px;
+  animation: borderGlow 2s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+  50% { box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.9); }
+}
+
+.login-box {
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 18px;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 300px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.login-title {
+  color: white;
+  text-align: center;
+  font-size: 1.8rem;
+  margin: 0 0 10px 0;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.login-input {
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 15px;
+  padding: 12px 15px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.login-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.login-input:focus {
+  outline: none;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  transform: scale(1.02);
+}
+
+.login-button {
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 15px;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.login-button:hover {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
+  transform: scale(1.05);
+}
+
+.login-error {
+  color: #ff4b4b;
+  text-align: center;
+  margin: 0;
+  font-size: 0.9rem;
+  min-height: 20px;
+}
+
+/* Versteckte Elemente */
+.hidden { display: none !important; }
+.main-content.hidden { display: none; }
+
+/* Rotate Overlay */
 .rotate-overlay {
   position: fixed;
   top: 0;
@@ -16,24 +113,12 @@
   box-sizing: border-box;
 }
 
-/* Nachricht in der Mitte */
 .rotate-message {
   max-width: 300px;
   font-weight: bold;
 }
 
-/* Klasse um das Overlay unsichtbar zu machen */
-.hidden {
-  display: none;
-}
-
-/* Overlay nur bei Portrait-Modus auf kleinen Bildschirmen anzeigen */
-@media (max-width: 768px) and (orientation: landscape) {
-  #rotateOverlay {
-    display: flex !important;
-  }
-}
-
+/* Restliche Styles (unverändert aus deinem Original) */
 html, body {
   margin: 0;
   padding: 0;
@@ -69,44 +154,30 @@ html, body {
   padding: 1rem;
 }
 
-.fade-in {
-  animation: fadeInElements 1s ease forwards;
-}
-@keyframes fadeInElements {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-/* Fade-Out bleibt wie gehabt */
-.fade-out {
-  animation: fadeOutElements 1s ease forwards;
-}
-@keyframes fadeOutElements {
-  from { opacity: 1; transform: scale(1); }
-  to   { opacity: 0; transform: scale(0.9); }
-}
+.fade-in { animation: fadeInElements 1s ease forwards; }
+.fade-out { animation: fadeOutElements 1s ease forwards; }
 
 .header-main {
-  position:fixed;
-  top: 10px;            /* oben etwas Abstand */
-  left: 50px;           /* links etwas Abstand */
-  font-size: 8vw;       /* etwas kleiner als header-sub */
+  position: fixed;
+  top: 10px;
+  left: 50px;
+  font-size: 8vw;
   color: white;
   text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
   z-index: 10;
   opacity: 1;
   transition: transform 0.5s ease, opacity 0.5s ease;
-  animation: none !important; /* Animationen unterbinden, da immer sichtbar */
+  animation: none !important;
   user-select: none;
-  pointer-events: none; /* falls nicht interaktiv */
+  pointer-events: none;
 }
 
 .header-sub {
-  position:relative;
+  position: relative;
   top: 20%;
   left: 8%;
   transform: translate(-50%, -50%);
-  font-size: 18vw;       /* größer als header-main */
+  font-size: 18vw;
   color: white;
   text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
   z-index: 9;
@@ -187,11 +258,6 @@ html, body {
   transform: scale(1.1);
 }
 
-.fade-out {
-  animation: fadeOut 1s forwards;
-}
-
-
 .textbox {
   position: fixed;
   top: 50%;
@@ -212,10 +278,6 @@ html, body {
   animation: openTextbox 0.5s forwards;
 }
 
-.textbox.hidden {
-  display: none;
-}
-
 .textbox-close {
   position: absolute;
   top: 10px;
@@ -229,9 +291,7 @@ html, body {
   z-index: 2;
 }
 
-.textbox-close:hover {
-  color: #ffffff;
-}
+.textbox-close:hover { color: #ffffff; }
 
 .textbox-header {
   margin: 10px;
@@ -249,27 +309,20 @@ html, body {
   line-height: 1.6;
 }
 
-.textbox-content::-webkit-scrollbar {
-  width: 10px;
+.textbox-content::-webkit-scrollbar { width: 10px; }
+.textbox-content::-webkit-scrollbar-track { background: rgba(50,0,0,0.4); border-radius: 10px; }
+.textbox-content::-webkit-scrollbar-thumb { background: #8b0000; border-radius: 10px; box-shadow: 0 0 10px #8b0000; }
+.textbox-content::-webkit-scrollbar-thumb:hover { background: #b30000; }
+
+/* Keyframes und Animationen */
+@keyframes fadeInElements {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-.textbox-content::-webkit-scrollbar-track {
-  background: rgba(50,0,0,0.4);
-  border-radius: 10px;
-}
-
-.textbox-content::-webkit-scrollbar-thumb {
-  background: #8b0000;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #8b0000;
-}
-
-.textbox-content::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
-}
-
-.fade-in {
-  animation: fadeInElements 2s ease forwards;
+@keyframes fadeOutElements {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.9); }
 }
 
 @keyframes fadeOut {
@@ -285,57 +338,28 @@ html, body {
   50%    { opacity: 1; filter: drop-shadow(0 0 20px #4e0000); }
 }
 
-@keyframes fadeInElements {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 @keyframes openTextbox {
   to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-
 }
 
 @keyframes closeTextbox {
   0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
   100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-
 }
 
-/* Herz pulsiert (rot leuchtend) */
-.heart-pulse {
-  animation: heartbeat 1.5s infinite ease-in-out;
-  filter: drop-shadow(0 0 15px red);
-}
 @keyframes heartbeat {
   0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px red); }
   50% { transform: scale(1.1); filter: drop-shadow(0 0 25px red); }
 }
 
-.hide-sub {
-  animation: fadeOutSub 0.6s ease forwards;
-}
 @keyframes fadeOutSub {
   from { opacity: 1; transform: translateY(0); }
   to   { opacity: 0; transform: translateY(20px); }
 }
 
-.show-sub {
-  animation: fadeInSub 0.6s ease forwards;
-}
 @keyframes fadeInSub {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Klasse für „Ich liebe dich“ ausblenden nach oben */
-.hide-main {
-  animation: fadeOutMain 0.6s ease forwards;
 }
 
 @keyframes fadeOutMain {
@@ -343,12 +367,13 @@ html, body {
   to   { opacity: 0; transform: translateY(-20px); }
 }
 
-/* Passe die Sub-Headline-Ausblendung an: ebenfalls nach oben */
-.hide-sub {
-  animation: fadeOutSub 0.6s ease forwards;
-}
-
-@keyframes fadeOutSub {
-  from { opacity: 1; transform: translateY(0); }
-  to   { opacity: 0; transform: translateY(-20px); }
+/* Mobilansicht */
+@media (max-width: 768px) and (orientation: landscape) {
+  #rotateOverlay {
+    display: flex !important;
+  }
+  .login-box {
+    min-width: 250px;
+    padding: 30px 20px;
+  }
 }

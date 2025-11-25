@@ -1,17 +1,69 @@
-(() => {
+// Login System
+const loginOverlay = document.getElementById('loginOverlay');
+const mainContent = document.getElementById('mainContent');
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
+const loginBtn = document.getElementById('loginBtn');
+const loginError = document.getElementById('loginError');
+
+// Anmeldedaten (kannst du anpassen)
+const CORRECT_USERNAME = 'Lovi';
+const CORRECT_PASSWORD = 'princess123';
+
+// Login Funktion
+function handleLogin() {
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value.trim();
+  
+  if (username === CORRECT_USERNAME && password === CORRECT_PASSWORD) {
+    // Erfolgreich: Login ausblenden, Hauptinhalt einblenden
+    loginOverlay.style.opacity = '0';
+    loginOverlay.style.transition = 'opacity 0.5s ease';
+    
+    setTimeout(() => {
+      loginOverlay.classList.add('hidden');
+      mainContent.classList.remove('hidden');
+      initializeApp();
+    }, 500);
+  } else {
+    // Fehler: Nachricht anzeigen
+    loginError.textContent = 'Falscher Benutzername oder Passwort';
+    loginError.classList.add('fade-in');
+    setTimeout(() => {
+      loginError.classList.remove('fade-in');
+    }, 2000);
+  }
+}
+
+// Event Listener für Login
+loginBtn.addEventListener('click', handleLogin);
+
+// Enter-Taste für Login
+[usernameInput, passwordInput].forEach(input => {
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handleLogin();
+  });
+});
+
+// Hauptfunktionen der App
+function initializeApp() {
   window.scrollTo(0, 0);
   document.body.style.overflowX = "hidden";
-  let lastScrollY = 0;
-
-  window.addEventListener("scroll", () => {
-    window.scrollTo(0, window.scrollY);
-  });
-
-  document.body.addEventListener("touchmove", e => {
-    e.preventDefault();
-  }, { passive: false });
-
+  
   const rotateOverlay = document.getElementById("rotateOverlay");
+  const screen = document.getElementById("whiteScreen");
+  const background = document.getElementById("background");
+  const buttons = document.querySelectorAll(".glow-button");
+  const heart = document.getElementById("heart");
+  const infoBox = document.getElementById("infoBox");
+  const textboxContent = document.getElementById("textboxContent");
+  const closeBtn = document.getElementById("closeTextbox");
+  const buttonContainer = document.getElementById("buttonContainer");
+  const headings = document.querySelector(".heading-container");
+  const headerMain = document.querySelector(".header-main");
+  const headerSub = document.querySelector(".header-sub");
+
+  // Orientierung prüfen
   function checkOrientation() {
     if (window.matchMedia("(max-width: 768px) and (orientation: landscape)").matches) {
       rotateOverlay?.classList.remove("hidden");
@@ -22,32 +74,15 @@
 
   window.addEventListener("orientationchange", () => {
     setTimeout(() => location.reload(), 500);
-    setTimeout(checkOrientation, 600);
   });
   window.addEventListener("resize", checkOrientation);
+  checkOrientation();
 
+  // Initialisierung nach Fade-in
   const todayISO = new Date().toISOString().split("T")[0];
-  const buttons = document.querySelectorAll(".glow-button");
-  const heart = document.getElementById("heart");
-  const background = document.getElementById("background");
-  const infoBox = document.getElementById("infoBox");
-  const textboxContent = document.getElementById("textboxContent");
-  const closeBtn = document.getElementById("closeTextbox");
-  const buttonContainer = document.getElementById("buttonContainer");
-  const headings = document.querySelector(".heading-container");
-  const headerMain = document.querySelector(".header-main");
-  const headerSub = document.querySelector(".header-sub");
-
   heart.classList.add("heart-pulse");
 
   window.addEventListener("load", () => {
-    checkOrientation();
-    headerMain?.classList.add("move-main-up", "heading-shift-right");
-    headerSub?.classList.add("show-sub", "heading-shift-right", "calendar-large");
-    buttonContainer.classList.replace("fade-out", "fade-in");
-    heart.classList.replace("fade-out", "fade-in");
-    headings?.classList.replace("fade-out", "fade-in");
-    const screen = document.getElementById("whiteScreen");
     screen?.classList.add("fade-out-white");
     setTimeout(() => {
       screen?.remove();
@@ -55,6 +90,7 @@
     }, 1500);
   });
 
+  // Button Logik
   buttons.forEach(button => {
     const btnDate = button.dataset.date;
     const btnText = button.dataset.text?.replace(/\n/g, "<br>");
@@ -104,6 +140,7 @@
     }
   });
 
+  // Schließen Button
   closeBtn.addEventListener("click", () => {
     infoBox.style.animation = "closeTextbox 0.5s forwards";
     setTimeout(() => {
@@ -127,4 +164,7 @@
       checkOrientation();
     }, 500);
   });
-})();
+}
+
+// Sofort ausführen falls bereits eingeloggt (optional für "Remember me" Funktionalität)
+// initializeApp();

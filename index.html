@@ -7,122 +7,51 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="rotateOverlay" class="rotate-overlay hidden">
-    <div class="rotate-message">
-      Looovi, bitte dreh dein handy nach links oder rechts. Ist egal welche richtung. Hauptsache du hast Hochformat <3
+  <!-- Login Overlay -->
+  <div id="loginOverlay" class="login-overlay">
+    <div class="login-container">
+      <div class="login-box">
+        <h1 class="login-title">Willkommen zurück</h1>
+        <input type="text" id="username" class="login-input" placeholder="Benutzername" autocomplete="username">
+        <input type="password" id="password" class="login-input" placeholder="Passwort" autocomplete="current-password">
+        <button id="loginBtn" class="login-button">Anmelden</button>
+        <p id="loginError" class="login-error"></p>
+      </div>
     </div>
   </div>
-  <div class="white-screen" id="whiteScreen"></div>
-  <div class="background hidden" id="background">
-    <div class="heading-container">
-      <h2 class="header-main">Ich Liebe Dich</h2>
-      <h2 class="header-sub">Kalender</h2>
+
+  <!-- Hauptinhalt (initial versteckt) -->
+  <div id="mainContent" class="main-content hidden">
+    <div id="rotateOverlay" class="rotate-overlay hidden">
+      <div class="rotate-message">
+        Looovi, bitte dreh dein handy nach links oder rechts. Ist egal welche richtung. Hauptsache du hast Hochformat <3
+      </div>
     </div>
-    <img src="herz.png" alt="Leuchtendes Herz" class="heart" id="heart" />
-
-    <div class="button-container" id="buttonContainer">
-
-      <button class="glow-button" data-date="2025-08-04" data-text="Wenn du diese Zeilen liest, bist du gerade aufgewacht. Ich stelle mir vor, wie du in die Weite Welt blickst und spürst, wie sehr ich dir jetzt gerade fehle, so sehr, dass jeder Tag ohne Dich sich wie eine Ewigkeit anfühlt.
-In jeder Minute, die du entfernt bist, führe ich ein inneres Tagebuch über dich:
-
-Durch welche Strassen wirst du heute gehen?
-Wirst du dich verlieren in dieser riesigen stadt?
-Wirst du Lachen? Und wenn ja, durch was oder duch wem?
-Wie hat die aufgehende Sonne Dein Gesicht gestreichelt?
-Meine Neugier auf alles was du erlebst, ist grenzenlos. Berichte mir von jeder kleinen Entdeckung!
-
-Ich vermisse dich so sehr!
-Ohne Dich klingt alles so anders… Der Wind ist kühler, die Farben verblassen…
-
-Ich vermisse: Dein Lächeln welches mir jeden Tag Lebensfreude schenkt. Deine Umarmungen, fest aber auch süß. Dein leises, süßes „Guten Morgen“ beim Aufwachen. Deine fünf Minuten, die du morgens, mittags und abends hast.
-
-Jede dieser Kleinigkeiten ist für mich ein riesen Glück, und jeden Augenblick ohne Dich zähle ich wie ein unvollständiges Wort.
-
-Ein letzter Wunsch an meine kleine Prinzessin:
-Schreibe mir bitte eine Zeile jede Stunde nur ein paar Worte, ein Emoji oder ein Reel/TikTok. Ich sammle Deine Nachrichten in meinem Herzen! So weiß ich, dass du regelmäßig an mich denkst.
-P.S. Ich denke mit jedem Atemzug an dich. Also komm niemals auf den dummen Gedanken, dass du mir nichts wert wärst!
-
-Meine über alles geliebte Prinzessin, ich schreibe diesen Brief nur für dich! Ich lege all meine Sehnsucht und all meine Liebe hinein. Du bist mein größter Traum. Mein größtes Abenteuer. Und meine größte Liebe!
-
-In unendlicher Liebe,  
-Dein Lovi
-"><span class="btn-label">1</span><img src="icon.png" alt="Icon 1" /></button>
-
-      <button class="glow-button" data-date="2025-08-05" data-text="Wenn du diese Zeilen wiedereinmal liest, ist Berlin noch immer dein halbes zuhause(natürlich bin ich dein einzigstes richtige zuhause) du wachst auf und hast deinen ersten augenblick leider ohne mich... aber bald ist es soweit! Bald sehen wir uns endlich wieder meine kleine. 5 Tage müssen wir nurnoch warten! Ich stelle mir jeden morgen vor wie du wach wirst, in hoffnung das ich mich über nacht zu dir teleportiere und dich wach küssen kann. Aber vielleicht suchst und findest du eine alternative für meine morgen küsse, vielleicht kevin?!
-
-  Tag 2 ohne dich, und jede Stunde fühlt sich an wie die Unendlichkeit. Gestern habe ich mir vorgestellt, wie du durch die belebten Straßen Berlins läufst, vielleicht über den Alexanderplatz, vorbei am Fernsehturm, während du in der Menge ein geliebtes Gesicht suchst(Hoffentlich meins). Ob du an einer Straßenecke dir ein Latte zum mitnehmen holst oder einfach nur vapest, und den ersten Schluck oder zug genießt und an mich denkst wie ich dich anflehe würde mir einen zug zu geben und du deine augen verdrehen würdest und zu mir sagen würdest: 'Aber nicht so einen Langen... Der Pod muss noch die ganze woche halten!'. Ok meine kleine. 
-  Erzähle mir heute:
-
-  Welches Lied deinen Weg begleiten wird! Hältst du für einen Moment an und lässt ulalala - Makko durch deine gedanken dringen?
-
-  Welchen Duft wirst du wahr nehmen? Frisches Luft wenn du dein Fenster öffnest oder nur dreckige weil du an straßen lebst?
-
-  Mein inneres Tagebuch füllt sich mit Fragen, die nur du beantworten kannst. Jeder Satz, den du mir schreibst, ist wie eine Sternschnuppe! Sie sind zwar nicht selten aber ich wünsche mir bei jeden Satz, Wort oder Buchstaben, einen nachfolgenden kuss oder umarmung, den ich für immer Wertschätzte und in meinem Herzen behalte! Unsere Worte sind die Brücke, die unsere Leben und unsere Liebe verbindet auf ewig. Ich vermisse dich so sehr, dass selbst die Sterne in meinen Nächten nicht mehr so hell leuchten! 
-  Ohne dich:
-
-  klingt das Vogelgezwitscher zu einsam
-  schmeckt meine Morgen kippe unvollständig,
-  fühlt sich mein Herz schwerer an, als es sein sollte.
-
-  Doch gleichzeitig erfüllt mich der Gedanke an dich: 
-  Dein Lachen zerreißt mein Herz und ich schmelze dahin, deine Stimme ist mein schönstes Lied und dein Blick ist wie ein Kommpass der mir zeigt wo für ich Lebe.
-
-  Heute bitte ich dich schicke mir einen kleinen Brief, wenn du zwischendurch Vapest. Ein einziges Wort, ein Emoji oder ein kurzes Video reicht, um mein Herz zum schmelzen zu bringen. Jeder deiner Nachrichten ist ein Lichtstrahl, der die Schatten unserer weiten Distanz vertreibt.
-
-  Meine wunderschöne Prinzessin, in jeden Moment vermisse ich dich mehr und mehr. Du bist mein Zuhause, mein Abenteuer und mein größtes Glück. Möge dieser Brief/Text dich umarmen und dir zeigen, wie grenzenlos meine Liebe zu dir ist. Mein Herz gehört nur dir!
-
-  In unendlicher und tiefer Liebe verankert,
-  Dein Lovi <3
-"><span class="btn-label">2</span><img src="icon.png" alt="Icon 2" /></button>
-
-
-
-      <button class="glow-button" data-date="2040-08-01" data-text=":<"><span class="btn-label">3</span><img src="icon.png" alt="Icon 3" /></button>
-      <button class="glow-button" data-date="2025-08-07" data-text="Heute ist der 4te Tag ohne dich(leider) und ich habe mir etwas Besonderes überlegt: Heute gehen wir auf eine traum Abenteuer hihi nur du und ich. Keine entfernung. Keine Zeit. Nur du und ich! Mach die Augen zu(aber erst zu Ende lesen) 
-
-  Unser Gemeinsame Morgen
-  Du wachst nicht in Berlin auf, sondern in einer kleinen Hütte in Schweden. Die Sonne scheint durch die Holz Wände und weckt dein besaubertes Gesicht. Ich liege neben dir. Du hörst das sanfte leise schnurren von Gingi und. Ich küsse deine Stirn und flüstere:
-  „Guten Morgen, mein Herz…“
-  Du lächelst noch halb verschlafen und drehst dich zu mir. Ich spüre dein ruhigen Atem ganz nah. Für einen Moment gibt es nur uns. Keine Pläne. Keine Pflichten. Kein Distanz. Nur diesen Ort, an dem unsere Liebe zu Hause ist. 
-
-  Ein Tag nur für uns
-  Wir gehen durch aus unseren haus zum wasser. Wir sehen viele Inseln und halb Inseln und deine Haare fliegen im Wind. Du trägst mein(dein) tischirr, und ich finde, du hast noch nie schöner ausgesehen.
-  Wir sammeln Muscheln. Eine kleine, weiße Muschel nimmst du in die Hand und sagst:
-  'Ich finde diese Muschel am schön' und erklärst mir zum 2ten mal, warum die Schönheit nicht etwas besonderes sein muss sonder such etwas duschnitliches. Was die meisten nicht wollen...
-  Und ich? Ich finde eine, die zerbrochen, aber wunderschön ist.
-  „Wie mein Herz ohne dich“, sage ich zu dir.
-
-  Unserer Abend
-  Später sitzen wir auf einer kleinen Veranda, umhüllt von einer Decke, zwei Gläser Wein, dein Kopf auf meiner Brust.
-  Die Sonne sinkt langsam in denn see. Es war warm also dachten wir uns, wir gehen schwimmen. Wir hielten unsere Hände und schauten denn sonnenuntergang an. Wir hatten spaß doch dir war das wasser zu kalt geworden. :( wir waren nicht lange drinnen aber wir hatten eine sehr shöne zeit. Wir setzten und danach an einer Küste die nah zu unserem kleinen Haus ist. Wir beobachteten denn Sonnenuntergang 
-  Wir brauchen keine Worte. Weil alles, was wir fühlen, zwischen uns schwebt wie eine eigene Sprache.
-  Du nimmst meine Hand und flüsterst:
-  „Versprich mir, dass wir das irgendwann wirklich machen.“
-  Ich küsse deine Stirn und sage: 'Ich verspreche dir alles meine Prinzessin'
-
-  Zurück in der Realität. Aber nur kurz...
-  Du bist in Berlin... :/
-  Aber in deinem Herzen warst du gerade bei mir.
-  Und weißt du was? Ich bin in jedem Moment bei dir im Herzen.
-  Vielleicht gibt es diesen Ort noch nicht.
-  Aber in mir lebt er und och hoffe ab jetzt auch in dir.
-  Und ich werde dafür sorgen, dass wir ihn gemeinsam finden.
-
-  Ich liebe dich, meine kleine.
-  Du bist nicht nur der Mittelpunkt meines Tages. Du bist meine Vergangenheit, meine Zukunft und jeder einzelne Herzschlag dazwischen.
-  Mit dir ist mein gesamtes Leben ein Traum.
-
-  Über alles in liebe,
-  Dein lovi <3
-  "><span class="btn-label">4</span><img src="icon.png" alt="Icon 4" /></button>
-      <button class="glow-button" data-date="2025-08-08" data-text="Viel Text für Button 5…"><span class="btn-label">5</span><img src="icon.png" alt="Icon 5" /></button>
-      <button class="glow-button" data-date="2025-08-09" data-text="Viel Text für Button 6…"><span class="btn-label">6</span><img src="icon.png" alt="Icon 6" /></button>
-    </div>
-
-    <div class="textbox hidden" id="infoBox">
-      <button class="textbox-close" id="closeTextbox">&times;</button>
-      <h2 class="textbox-header">Meine Lovi!</h2>
-      <div class="textbox-content" id="textboxContent"></div>
+    
+    <div class="white-screen" id="whiteScreen"></div>
+    
+    <div class="background hidden" id="background">
+      <div class="heading-container">
+        <h2 class="header-main">Ich Liebe Dich</h2>
+        <h2 class="header-sub">Kalender</h2>
+      </div>
+      
+      <img src="herz.png" alt="Leuchtendes Herz" class="heart" id="heart" />
+      
+      <div class="button-container" id="buttonContainer">
+        <button class="glow-button" data-date="2025-08-04" data-text="Wenn du diese Zeilen liest, bist du gerade aufgewacht..."><span class="btn-label">1</span><img src="icon.png" alt="Icon 1" /></button>
+        <button class="glow-button" data-date="2025-08-05" data-text="Wenn du diese Zeilen wiedereinmal liest, ist Berlin noch immer dein halbes zuhause..."><span class="btn-label">2</span><img src="icon.png" alt="Icon 2" /></button>
+        <button class="glow-button" data-date="2040-08-01" data-text=":<"><span class="btn-label">3</span><img src="icon.png" alt="Icon 3" /></button>
+        <button class="glow-button" data-date="2025-08-07" data-text="Heute ist der 4te Tag ohne dich(leider) und ich habe mir etwas Besonderes überlegt..."><span class="btn-label">4</span><img src="icon.png" alt="Icon 4" /></button>
+        <button class="glow-button" data-date="2025-08-08" data-text="Viel Text für Button 5…"><span class="btn-label">5</span><img src="icon.png" alt="Icon 5" /></button>
+        <button class="glow-button" data-date="2025-08-09" data-text="Viel Text für Button 6…"><span class="btn-label">6</span><img src="icon.png" alt="Icon 6" /></button>
+      </div>
+      
+      <div class="textbox hidden" id="infoBox">
+        <button class="textbox-close" id="closeTextbox">&times;</button>
+        <h2 class="textbox-header">Meine Lovi!</h2>
+        <div class="textbox-content" id="textboxContent"></div>
+      </div>
     </div>
   </div>
 
