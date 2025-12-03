@@ -1,60 +1,187 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
-  <title>Missing Days</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <!-- Login Overlay -->
-  <div id="loginOverlay" class="login-overlay">
-    <div class="login-container">
-      <div class="login-box">
-        <h1 class="login-title">Willkommen zurück</h1>
-        <input type="text" id="username" class="login-input" placeholder="Benutzername" autocomplete="username">
-        <input type="password" id="password" class="login-input" placeholder="Passwort" autocomplete="current-password">
-        <button id="loginBtn" class="login-button">Anmelden</button>
-        <p id="loginError" class="login-error"></p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rechner Trainer</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Login Screen -->
+      <div id="login-screen" class="fullscreen centered">
+        <div class="card login-card">
+          <h1 class="app-title">Rechner Trainer</h1>
+          <p class="subtitle">Bitte Passwort eingeben, um fortzufahren.</p>
+          <form id="login-form" class="login-form">
+            <label for="password-input" class="field-label">Passwort</label>
+            <input
+              id="password-input"
+              type="password"
+              class="text-input"
+              placeholder="••••••••"
+              autocomplete="off"
+              required
+            />
+            <button type="submit" class="primary-btn">Betreten</button>
+            <p id="login-error" class="error-text hidden">
+              Falsches Passwort. Bitte versuche es erneut.
+            </p>
+          </form>
+          <p class="hint-text">
+            Hinweis: Du kannst das Passwort später in der Datei
+            <code>app.js</code> anpassen.
+          </p>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Hauptinhalt (initial versteckt) -->
-  <div id="mainContent" class="main-content hidden">
-    <div id="rotateOverlay" class="rotate-overlay hidden">
-      <div class="rotate-message">
-        Looovi, bitte dreh dein handy nach links oder rechts. Ist egal welche richtung. Hauptsache du hast Hochformat <3
-      </div>
-    </div>
-    
-    <div class="white-screen" id="whiteScreen"></div>
-    
-    <div class="background hidden" id="background">
-      <div class="heading-container">
-        <h2 class="header-main">Ich Liebe Dich</h2>
-        <h2 class="header-sub">Kalender</h2>
-      </div>
-      
-      <img src="herz.png" alt="Leuchtendes Herz" class="heart" id="heart" />
-      
-      <div class="button-container" id="buttonContainer">
-        <button class="glow-button" data-date="2025-08-04" data-text="Wenn du diese Zeilen liest, bist du gerade aufgewacht..."><span class="btn-label">1</span><img src="icon.png" alt="Icon 1" /></button>
-        <button class="glow-button" data-date="2025-08-05" data-text="Wenn du diese Zeilen wiedereinmal liest, ist Berlin noch immer dein halbes zuhause..."><span class="btn-label">2</span><img src="icon.png" alt="Icon 2" /></button>
-        <button class="glow-button" data-date="2040-08-01" data-text=":<"><span class="btn-label">3</span><img src="icon.png" alt="Icon 3" /></button>
-        <button class="glow-button" data-date="2025-08-07" data-text="Heute ist der 4te Tag ohne dich(leider) und ich habe mir etwas Besonderes überlegt..."><span class="btn-label">4</span><img src="icon.png" alt="Icon 4" /></button>
-        <button class="glow-button" data-date="2025-08-08" data-text="Viel Text für Button 5…"><span class="btn-label">5</span><img src="icon.png" alt="Icon 5" /></button>
-        <button class="glow-button" data-date="2025-08-09" data-text="Viel Text für Button 6…"><span class="btn-label">6</span><img src="icon.png" alt="Icon 6" /></button>
-      </div>
-      
-      <div class="textbox hidden" id="infoBox">
-        <button class="textbox-close" id="closeTextbox">&times;</button>
-        <h2 class="textbox-header">Meine Lovi!</h2>
-        <div class="textbox-content" id="textboxContent"></div>
-      </div>
-    </div>
-  </div>
+      <!-- Main App -->
+      <div id="main-screen" class="hidden app-container">
+        <header class="app-header">
+          <div>
+            <h1 class="app-title">Rechner Trainer</h1>
+            <p class="subtitle">
+              Übe Rechnen mit Lovis website
+            </p>
+          </div>
+          <div class="scoreboard">
+            <div class="score-item">
+              <span class="score-label">Punkte</span>
+              <span id="score-points" class="score-value">0</span>
+            </div>
+            <div class="score-item">
+              <span class="score-label">Gelöste Aufgaben</span>
+              <span id="score-completed" class="score-value">0</span>
+            </div>
+          </div>
+        </header>
 
-  <script src="script.js"></script>
-</body>
+        <main class="main-layout">
+          <section class="tasks-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Aufgaben</h2>
+              <span id="task-count" class="badge">0 Aufgaben</span>
+            </div>
+            <p class="panel-description">
+              Wähle eine Aufgabe aus der Liste. Die Konfiguration findest du in
+              der Datei <code>tasks.json</code>.
+            </p>
+            <div id="tasks-list" class="tasks-list"></div>
+            <p id="tasks-error" class="error-text hidden">
+              Konnte die Aufgaben nicht laden. Bitte prüfe die Datei
+              <code>tasks.json</code>.
+            </p>
+          </section>
+
+          <section class="trainer-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Rechen-Trainer</h2>
+            </div>
+            <div id="trainer-empty" class="trainer-empty-state">
+              <p class="subtitle">
+                Wähle links eine Aufgabe aus, um zu starten.
+              </p>
+              <p class="hint-text">
+                Die KI führt dich Schritt für Schritt durch die Rechnung. Du
+                musst Zwischenergebnisse eintragen, um weiterzukommen.
+              </p>
+            </div>
+
+            <div id="trainer-content" class="trainer-content hidden">
+              <div class="trainer-task-header">
+                <div>
+                  <p id="trainer-difficulty" class="pill pill-difficulty">
+                    Schwierigkeit
+                  </p>
+                  <h3 id="trainer-title" class="trainer-title"></h3>
+                  <p id="trainer-description" class="trainer-description"></p>
+                </div>
+                <div class="pill-group">
+                  <span id="trainer-points" class="pill pill-points"></span>
+                </div>
+              </div>
+
+              <div class="conversation-layout">
+                <div class="conversation-panel">
+                  <div id="conversation-log" class="conversation-log"></div>
+                  <div id="step-input-container" class="step-input-container">
+                    <form id="step-form" class="step-form">
+                      <label
+                        id="step-label"
+                        for="step-input"
+                        class="field-label"
+                      ></label>
+                      <input
+                        id="step-input"
+                        type="text"
+                        class="text-input"
+                        autocomplete="off"
+                        required
+                      />
+                      <button type="submit" class="primary-btn">
+                        Bestätigen
+                      </button>
+                    </form>
+                    <p id="step-error" class="error-text hidden"></p>
+                  </div>
+
+                  <div
+                    id="final-compare-container"
+                    class="final-compare-container hidden"
+                  >
+                    <h4 class="final-title">
+                      Deine Lösung mit der KI vergleichen
+                    </h4>
+                    <p class="hint-text">
+                      Trage dein Endergebnis ein. Die KI prüft, ob es korrekt
+                      ist.
+                    </p>
+                    <form id="final-form" class="final-form">
+                      <label
+                        for="final-input"
+                        class="field-label inline-label"
+                      >
+                        Endergebnis
+                      </label>
+                      <input
+                        id="final-input"
+                        type="text"
+                        class="text-input"
+                        autocomplete="off"
+                        required
+                      />
+                      <button type="submit" class="primary-btn">
+                        Prüfen
+                      </button>
+                    </form>
+                    <p id="final-feedback" class="final-feedback"></p>
+                  </div>
+                </div>
+
+                <aside class="assistant-panel">
+                  <h4 class="assistant-title">KI-Assistent</h4>
+                  <div id="assistant-message" class="assistant-message">
+                    <p>
+                      Ich bin dein kostenloser KI-Trainer. Wähle eine Aufgabe
+                      und wir rechnen sie gemeinsam Schritt für Schritt.
+                    </p>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
 </html>
+
+
