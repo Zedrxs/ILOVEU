@@ -1,187 +1,146 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rechner Trainer</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="app">
-      <!-- Login Screen -->
-      <div id="login-screen" class="fullscreen centered">
-        <div class="card login-card">
-          <h1 class="app-title">Rechner Trainer</h1>
-          <p class="subtitle">Bitte Passwort eingeben, um fortzufahren.</p>
-          <form id="login-form" class="login-form">
-            <label for="password-input" class="field-label">Passwort</label>
-            <input
-              id="password-input"
-              type="password"
-              class="text-input"
-              placeholder="••••••••"
-              autocomplete="off"
-              required
-            />
-            <button type="submit" class="primary-btn">Betreten</button>
-            <p id="login-error" class="error-text hidden">
-              Falsches Passwort. Bitte versuche es erneut.
-            </p>
-          </form>
-          <p class="hint-text">
-            Hinweis: Du kannst das Passwort später in der Datei
-            <code>app.js</code> anpassen.
-          </p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lovi Weihnachts-Adventskalender</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Hintergrund-Countdown -->
+    <div class="background-countdown" id="backgroundCountdown">24</div>
+    <div id="snow-container"></div>
+
+    <!-- Login Screen -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-card">
+            <div class="login-icon">🎄</div>
+            <h1 class="login-title">Lovi Adventskalender</h1>
+            <p class="login-subtitle">Lovi Passwort eingeben:</p>
+            <input type="password" class="login-input" id="passwordInput" placeholder="Passwort eingeben" autocomplete="off">
+            <button class="login-button" id="loginButton">Kalender öffnen</button>
+            <div class="login-error" id="loginError"></div>
         </div>
-      </div>
-
-      <!-- Main App -->
-      <div id="main-screen" class="hidden app-container">
-        <header class="app-header">
-          <div>
-            <h1 class="app-title">Rechner Trainer</h1>
-            <p class="subtitle">
-              Übe Rechnen mit Lovis website
-            </p>
-          </div>
-          <div class="scoreboard">
-            <div class="score-item">
-              <span class="score-label">Punkte</span>
-              <span id="score-points" class="score-value">0</span>
-            </div>
-            <div class="score-item">
-              <span class="score-label">Gelöste Aufgaben</span>
-              <span id="score-completed" class="score-value">0</span>
-            </div>
-          </div>
-        </header>
-
-        <main class="main-layout">
-          <section class="tasks-panel">
-            <div class="panel-header">
-              <h2 class="panel-title">Aufgaben</h2>
-              <span id="task-count" class="badge">0 Aufgaben</span>
-            </div>
-            <p class="panel-description">
-              Wähle eine Aufgabe aus der Liste. Die Konfiguration findest du in
-              der Datei <code>tasks.json</code>.
-            </p>
-            <div id="tasks-list" class="tasks-list"></div>
-            <p id="tasks-error" class="error-text hidden">
-              Konnte die Aufgaben nicht laden. Bitte prüfe die Datei
-              <code>tasks.json</code>.
-            </p>
-          </section>
-
-          <section class="trainer-panel">
-            <div class="panel-header">
-              <h2 class="panel-title">Rechen-Trainer</h2>
-            </div>
-            <div id="trainer-empty" class="trainer-empty-state">
-              <p class="subtitle">
-                Wähle links eine Aufgabe aus, um zu starten.
-              </p>
-              <p class="hint-text">
-                Die KI führt dich Schritt für Schritt durch die Rechnung. Du
-                musst Zwischenergebnisse eintragen, um weiterzukommen.
-              </p>
-            </div>
-
-            <div id="trainer-content" class="trainer-content hidden">
-              <div class="trainer-task-header">
-                <div>
-                  <p id="trainer-difficulty" class="pill pill-difficulty">
-                    Schwierigkeit
-                  </p>
-                  <h3 id="trainer-title" class="trainer-title"></h3>
-                  <p id="trainer-description" class="trainer-description"></p>
-                </div>
-                <div class="pill-group">
-                  <span id="trainer-points" class="pill pill-points"></span>
-                </div>
-              </div>
-
-              <div class="conversation-layout">
-                <div class="conversation-panel">
-                  <div id="conversation-log" class="conversation-log"></div>
-                  <div id="step-input-container" class="step-input-container">
-                    <form id="step-form" class="step-form">
-                      <label
-                        id="step-label"
-                        for="step-input"
-                        class="field-label"
-                      ></label>
-                      <input
-                        id="step-input"
-                        type="text"
-                        class="text-input"
-                        autocomplete="off"
-                        required
-                      />
-                      <button type="submit" class="primary-btn">
-                        Bestätigen
-                      </button>
-                    </form>
-                    <p id="step-error" class="error-text hidden"></p>
-                  </div>
-
-                  <div
-                    id="final-compare-container"
-                    class="final-compare-container hidden"
-                  >
-                    <h4 class="final-title">
-                      Deine Lösung mit der KI vergleichen
-                    </h4>
-                    <p class="hint-text">
-                      Trage dein Endergebnis ein. Die KI prüft, ob es korrekt
-                      ist.
-                    </p>
-                    <form id="final-form" class="final-form">
-                      <label
-                        for="final-input"
-                        class="field-label inline-label"
-                      >
-                        Endergebnis
-                      </label>
-                      <input
-                        id="final-input"
-                        type="text"
-                        class="text-input"
-                        autocomplete="off"
-                        required
-                      />
-                      <button type="submit" class="primary-btn">
-                        Prüfen
-                      </button>
-                    </form>
-                    <p id="final-feedback" class="final-feedback"></p>
-                  </div>
-                </div>
-
-                <aside class="assistant-panel">
-                  <h4 class="assistant-title">KI-Assistent</h4>
-                  <div id="assistant-message" class="assistant-message">
-                    <p>
-                      Ich bin dein kostenloser KI-Trainer. Wähle eine Aufgabe
-                      und wir rechnen sie gemeinsam Schritt für Schritt.
-                    </p>
-                  </div>
-                </aside>
-              </div>
-            </div>
-          </section>
-        </main>
-      </div>
     </div>
 
+    <!-- Schneeflocken -->
+    <div class="snowflakes-container" id="snowflakesContainer"></div>
+
+    <!-- Haupt-App -->
+    <div class="main-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <div class="logo-icon">🎁</div>
+                <div class="logo-text">Weihnachtskalender 2025</div>
+            </div>
+            <div class="header-info">
+                <div class="solved-count">
+                    <i class="fas fa-star"></i>
+                    <span id="solvedCount">0/24</span>
+                </div>
+                <div class="current-date" id="currentDate"></div>
+            </div>
+        </header>
+
+        <!-- Stern-Progress -->
+        <div class="star-progress-container">
+            <div class="star-progress" id="starProgress">
+                <!-- Sterne werden per JS eingefügt -->
+            </div>
+        </div>
+
+        <!-- Kalender-Grid -->
+        <div class="calendar-container">
+            <div class="calendar-grid-wrapper">
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Türchen werden per JS eingefügt -->
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="page-navigation">
+                <button class="nav-button" id="prevButton" aria-label="Vorherige Seite">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="page-indicators" id="pageIndicators">
+                    <!-- Page Indicators werden per JS eingefügt -->
+                </div>
+                
+                <button class="nav-button" id="nextButton" aria-label="Nächste Seite">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>Öffne Täglich dein Adventskalender. hihi</p>
+    </footer>
+
+    <!-- Rätsel Modal -->
+    <div class="modal-overlay" id="riddleModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title" id="riddleModalTitle">Türchen <span id="doorNumber">1</span></h2>
+                <button class="modal-close" id="closeRiddleModal" aria-label="Schließen">×</button>
+            </div>
+            <div class="modal-content">
+                <h3 class="question-title" id="questionTitle"></h3>
+                <p class="question-text" id="questionText"></p>
+                
+                <div class="options-container" id="optionsContainer">
+                    <!-- Optionen werden per JS eingefügt -->
+                </div>
+                
+                <div id="specialInputs" style="display: none;">
+                    <!-- Spezielle Inputs für Slider, Text, Datum -->
+                </div>
+                
+                <button class="submit-button" id="submitAnswer">Antwort überprüfen</button>
+                <div class="feedback-message" id="feedbackMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Belohnung Modal -->
+    <div class="modal-overlay" id="rewardModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Türchen <span id="rewardDoorNumber">1</span> geöffnet!</h2>
+                <button class="modal-close" id="closeRewardModal" aria-label="Schließen">×</button>
+            </div>
+            <div class="modal-content">
+                <div class="reward-emoji" id="rewardEmoji">🎁</div>
+                <div class="reward-text-container">
+                    <div class="reward-text" id="rewardText"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Konfetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Audio Elements -->
+    <audio id="doorSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="correctSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="bellSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-bells-echo-1561.mp3" type="audio/mpeg">
+    </audio>
+
+    
     <script src="app.js"></script>
-  </body>
+    <script src="riddles.js"></script>
+</body>
 </html>
-
-
