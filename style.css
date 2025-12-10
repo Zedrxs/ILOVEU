@@ -25,6 +25,13 @@
     box-sizing: border-box;
 }
 
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 html,
 body {
     width: 100%;
@@ -824,56 +831,62 @@ body::before {
 }
 
 .snowflake {
-  position: fixed;
-  top: -10vh;
-  width: 8px;
-  height: 8px;
-  background: var(--white);
-  border-radius: 50%;
-  opacity: 0.8;
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
-  z-index: 1000;
-  animation: fall 12s linear infinite, sway 6s ease-in-out infinite;
+    position: fixed;
+    top: -10vh;
+    width: 8px;
+    height: 8px;
+    background: var(--white);
+    border-radius: 50%;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+    z-index: 1000;
+    pointer-events: none;
+    animation: fall 12s linear infinite, sway 6s ease-in-out infinite;
 }
 
 @keyframes fall {
-  0% {
-    transform: translate3d(var(--sx, 0vw), -10vh, 0) scale(1);
-  }
-  100% {
-    transform: translate3d(var(--sx2, 0vw), 110vh, 0) scale(1);
-  }
+    0% {
+        transform: translate3d(var(--sx, 0vw), -10vh, 0) scale(1);
+    }
+
+    100% {
+        transform: translate3d(var(--sx2, 0vw), 110vh, 0) scale(1);
+    }
 }
 
 @keyframes sway {
-  0% {
-    margin-left: -10px;
-  }
-  50% {
-    margin-left: 20px;
-  }
-  100% {
-    margin-left: -10px;
-  }
+    0% {
+        margin-left: -10px;
+    }
+
+    50% {
+        margin-left: 20px;
+    }
+
+    100% {
+        margin-left: -10px;
+    }
 }
 
 @media (max-width: 900px) {
-  #grid {
-    grid-auto-columns: minmax(180px, 240px);
-  }
-  .door {
-    font-size: 1.6rem;
-  }
+    #grid {
+        grid-auto-columns: minmax(180px, 240px);
+    }
+
+    .door {
+        font-size: 1.6rem;
+    }
 }
 
 @media (max-width: 640px) {
-  .arrow {
-    height: 90px;
-    width: 48px;
-  }
-  #grid {
-    padding: 1rem 3rem;
-  }
+    .arrow {
+        height: 90px;
+        width: 48px;
+    }
+
+    #grid {
+        padding: 1rem 3rem;
+    }
 }
 
 /* ============ FOOTER ============ */

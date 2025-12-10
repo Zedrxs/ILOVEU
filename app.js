@@ -24,7 +24,6 @@ const rewardModal = document.getElementById('rewardModal');
 const doorSound = document.getElementById('doorSound');
 const correctSound = document.getElementById('correctSound');
 const bellSound = document.getElementById('bellSound');
-const snowflakesContainer = document.getElementById('snowflakesContainer');
 const confettiCanvas = document.getElementById('confetti-canvas');
 
 // ============ INITIALISIERUNG ============
@@ -34,7 +33,7 @@ function initApp() {
     createDoors();
     createPageIndicators();
     updateCountdown();
-    createSnowflakes();
+    Snow.init();
     setupEventListeners();
     loadProgress();
     adjustStarProgress();
@@ -372,40 +371,6 @@ function showReward(doorNumber) {
         adjustStarProgress();
     }
 }
-
-const snowContainer = document.getElementById("snow-container");
-
-let snowCount = 50;
-let snowSpeedMult = 1.0;
-let snowBoosted = false;
-
-function createSnowflakes(count) {
-    snowContainer.innerHTML = "";
-    for (let i = 0; i < count; i++) {
-        const f = document.createElement("div");
-        f.className = "snowflake";
-        const delay = Math.random() * 8;
-        const duration = 8 + Math.random() * 8;
-        const sx = Math.random() * 100;
-        const drift = (Math.random() * 60 - 30);
-        f.style.left = sx + "vw";
-        f.style.setProperty("--sx", sx + "vw");
-        f.style.setProperty("--sx2", (sx + drift) + "vw");
-        f.style.animationDuration = `${duration / snowSpeedMult}s, ${6 / snowSpeedMult}s`;
-        f.style.animationDelay = `${delay}s, ${delay / 2}s`;
-        f.style.opacity = 0.6 + Math.random() * 0.4;
-        f.style.transform = `scale(${0.6 + Math.random() * 0.8})`;
-        snowContainer.appendChild(f);
-    }
-}
-createSnowflakes(snowCount);
-
-function boostSnow() {
-    snowCount = 200;
-    snowSpeedMult = 1.5;
-    snowBoosted = true;
-    createSnowflakes(snowCount);
-}
 // ============ KONFETTI ============
 function createConfetti() {
     const canvas = confettiCanvas;
@@ -587,17 +552,18 @@ function setupEventListeners() {
     window.addEventListener('resize', () => {
         confettiCanvas.width = window.innerWidth;
         confettiCanvas.height = window.innerHeight;
-        createSnowflakes();
+        Snow.init();
     });
 }
 
 function handleLogin() {
     const password = passwordInput.value;
 
-    if (password === 'lovi liebt dich') {
+    if (password === CONFIG.PASSWORD) {
         loginOverlay.classList.add('hidden');
         updateCountdown();
-        createSnowflakes(); // Schneeflocken neu erstellen nach Login
+        Snow.init();
+        Snow.boost();
         setTimeout(() => {
             // Zusätzliche Animation nach kurzer Verzögerung
             document.querySelectorAll('.door').forEach(door => {
@@ -615,4 +581,4 @@ function handleLogin() {
 }
 
 // ============ APP START ============
-window.addEventListener('DOMContentLoaded', initApp);
+window.addEventListener('DOMContentLoaded', initApp, Snow.init());

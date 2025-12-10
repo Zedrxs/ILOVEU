@@ -13,12 +13,12 @@
 <body>
     <!-- Hintergrund-Countdown -->
     <div class="background-countdown" id="backgroundCountdown">24</div>
-    <div id="snow-container"></div>
 
     <!-- Login Screen -->
     <div class="login-overlay" id="loginOverlay">
         <div class="login-card">
             <div class="login-icon">🎄</div>
+            <div id="snow-container"></div>
             <h1 class="login-title">Lovi Adventskalender</h1>
             <p class="login-subtitle">Lovi Passwort eingeben:</p>
             <input type="password" class="login-input" id="passwordInput" placeholder="Passwort eingeben" autocomplete="off">
@@ -27,11 +27,10 @@
         </div>
     </div>
 
-    <!-- Schneeflocken -->
-    <div class="snowflakes-container" id="snowflakesContainer"></div>
-
     <!-- Haupt-App -->
     <div class="main-container">
+        
+        <div id="snow-container"></div>
         <!-- Header -->
         <header class="app-header">
             <div class="logo">
@@ -77,6 +76,9 @@
                 </button>
             </div>
         </div>
+
+        <div class="snowflake", id="snow-container"></div>
+
     </div>
 
     <!-- Footer -->
@@ -127,6 +129,7 @@
 
     <!-- Konfetti Canvas -->
     <canvas id="confetti-canvas"></canvas>
+    <div id="snow-container"></div>
 
     <!-- Audio Elements -->
     <audio id="doorSound" preload="auto">
@@ -139,8 +142,10 @@
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-bells-echo-1561.mp3" type="audio/mpeg">
     </audio>
 
-    
-    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="Snow.js"></script>
     <script src="riddles.js"></script>
+    <script src="app.js"></script>
+    
 </body>
 </html>
