@@ -323,7 +323,7 @@ function checkAnswer() {
 
     if (isCorrect) {
         // Erfolg
-        feedbackMessage.textContent = 'Richtig! Herzlichen Glückwunsch!';
+        feedbackMessage.textContent = 'Richtig Darling! Ich liebe dich <3';
         feedbackMessage.className = 'feedback-message correct';
 
         correctSound.volume = 0.3;
@@ -338,7 +338,7 @@ function checkAnswer() {
         }, 1500);
     } else {
         // Fehler
-        feedbackMessage.textContent = 'Leider falsch. Versuche es noch einmal!';
+        feedbackMessage.textContent = 'Falsch Lovi :< Versuche es noch nochmal <3';
         feedbackMessage.className = 'feedback-message incorrect';
 
         riddleModal.classList.add('shake');
